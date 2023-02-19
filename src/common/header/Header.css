@@ -1,0 +1,45 @@
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #222;
+    height: 36px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 32;
+    padding-left: 16;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#logo1{
+    float :left;
+}
+#buttons2{
+    
+    display: inline-flex;
+    float :right;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 8s linear;
+      background-color: #ff7f7f;
+      height: 35px;
+      width: 35px;
+      margin-left: 20px;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+}
