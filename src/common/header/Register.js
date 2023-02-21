@@ -6,21 +6,21 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import FormControl  from '@material-ui/core/FormControl';
 import { Button, FormHelperText, Input, InputLabel } from '@material-ui/core';
-import RegistrationSuccessful from './RegistrationSuccessful';
+import { useState } from 'react';
 
 
 
 
 export default function Register(){
-  const doneRegistration = true;
 
+    const[registered, setregistered] = useState(false);
   const handleSubmit = ()=> {
-    
+    setregistered(true);
 }
 
     return(
         <Box textAlign='center'>
-            <form onSubmit={handleSubmit}  noValidate>
+            <form onSubmit={handleSubmit}>
             <FormControl required style={{marginTop: 30, marginBottom: 20}} className='fromunit'>
                 <InputLabel htmlFor="my-input">First Name</InputLabel>
                 <Input type = "text" required id="my-input1" aria-describedby="my-helper-text" />
@@ -41,8 +41,8 @@ export default function Register(){
                 <InputLabel htmlFor="my-input">Contact No.</InputLabel>
                 <Input   type = "text" required id="my-input5" aria-describedby="my-helper-text" />
             </FormControl><br/> 
-            <Button type='submit' style={{marginTop: 50 , marginBottom: 20}} className="BookShow" id="bookShow"  variant="contained" color="primary">REGISTER</Button>
-            <RegistrationSuccessful props = {doneRegistration}/>
+            <Button onClick={handleSubmit}  style={{marginTop: 50 , marginBottom: 20}} className="BookShow" id="bookShow"  variant="contained" color="primary">REGISTER</Button>
+            {registered && <p>Registration Successful</p>}
             </form>
         </Box>
     )

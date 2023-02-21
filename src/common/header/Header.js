@@ -37,7 +37,7 @@ export default function Header(props){
                     </ul>
                 </nav>
             </header>
-            <ModalDialog open={open} handleClose={handleClose}/>        
+            <ModalDialog closeAfterTransition open={open} handleClose={handleClose}/>        
         </div>
     )
 }

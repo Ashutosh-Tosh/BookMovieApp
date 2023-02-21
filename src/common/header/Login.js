@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 
 const handleSubmit = ()=> {
-    console.log("from submitted");
+    
 }
 
 
@@ -19,7 +19,7 @@ const handleSubmit = ()=> {
 export default function Login(){
     return(
         <Box textAlign='center'>
-            <form onSubmit={handleSubmit}  noValidate>
+            <form onSubmit={handleSubmit}  >
                 <FormControl required style={{marginTop: 30 , marginBottom: 15}} className='fromunit'>
                     <InputLabel htmlFor="my-input">Username</InputLabel>
                     <Input type = "text" required id="my-input9" aria-describedby="my-helper-text" />
