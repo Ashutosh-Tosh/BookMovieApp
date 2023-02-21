@@ -28,14 +28,15 @@ export default function UpcomingGrid({imageUrls, titles , movieData}) {
     return ( 
                 <ImageList rowHeight={250}  cols={6}
                 style ={{ display: 'flex' , flexWrap: 'nowrap'}}>
-                    {imageUrls.map((item) => (
+                    {imageUrls.map((item,key) => (
                         <ImageListItem >
                             <img
                             src={item}
                             alt="Image not available"
+                            key={key}
                             />
                             <ImageListItemBar 
-                             title={"sup"}
+                             title={titles[key]}
                             />
                         </ImageListItem>
                     ))}
