@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.9.4",
-    "@material-ui/icons": "^3.0.2",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "axios": "^1.3.3",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-modal": "^3.12.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
+    "react-scripts": "^5.0.1",
     "react-youtube": "^7.13.1",
     "typeface-roboto": "0.0.54"
   },
@@ -19,5 +20,17 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8085"
+  "proxy": "http://localhost:8085",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
