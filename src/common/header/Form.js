@@ -8,11 +8,14 @@ import styles from '@material-ui/styles/withStyles';
 import Login from './Login';
 import Register from './Register';
 import { FormControl } from '@material-ui/core';
-
+import { useState } from 'react';
 
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  
+  
+  
 
   return (
     <div
@@ -44,8 +47,10 @@ function a11yProps(index) {
   };
 }
 
-export default function Form() {
+export default function Form({handleClose , loggedin , setLoggedIn}) {
   const [value, setValue] = React.useState(0);
+
+  const [ userIsLoggedIn , setUserIsLoggedIn] = useState(false);
  
 
   const handleChange = (event, newValue) => {
@@ -61,7 +66,7 @@ export default function Form() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Login/>
+        <Login loggedin = {loggedin} setLoggedIn = {setLoggedIn} handleClose={handleClose} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Register/>

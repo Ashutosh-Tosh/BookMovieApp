@@ -6,8 +6,15 @@ import BookShow from "../screens/bookshow/BookShow";
 import Confirmation from "../screens/confirmation/Confirmation";
 
 
+
+
 const Controller = () => {
   const baseUrl = "/api/v1/";
+
+//  run this for no-cors error -->
+//chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+
+  
 
   return (
     <Router>
