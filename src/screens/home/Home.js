@@ -9,7 +9,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import UpcomingGrid from './UpcomingGrid';
 import  { useState, useEffect } from 'react';
 import ImageList from '@material-ui/core/ImageList'
 import axios from 'axios';
@@ -185,30 +184,45 @@ formControl: {
             </div>
             
             <div id="upcmomingMoviesGrid" className="upcoming-movies">
-                <UpcomingGrid imageUrls ={imageUrls} titles = {titles} movieData={movieData}/>
+                <GridList cellHeight= {250}  cols={6}
+                    style ={{ display: 'flex' , flexWrap: 'nowrap' ,transform: "translateZ(0)" , width : "100%"}}>
+                        {imageUrls.map((item,key) => (
+                            <GridListTile key={key+499}>
+                                <img
+                                src={item}
+                                alt="Image not available"
+                                key={key+199}
+                                />
+                                <GridListTileBar 
+                                title={titles[key]}
+                                key = {key+99}
+                                />
+                            </GridListTile>
+                        ))}
+                </GridList>                
             </div> 
             <div style={{  display: 'flex' }}>  
   
                 <div style={{ width: "76%" , margin: "16px"}}>  
                     <Grid >
-                        <ImageList rowHeight={350}  cols={4}
+                        <GridList cellHeight={350}  cols={4}
                         style ={{ display: 'flex' }}>
                             {allmoviesPosters.map((item,key) => (
-                                <ImageListItem style = {{ cursor : "pointer"}} key={key+499} onClick={()=>{ 
+                                <GridListTile style = {{ cursor : "pointer"}} key={key+499} onClick={()=>{ 
                                     props.history.push(`/movie/${releasedMovieData.data.movies[key].id}`)}}>
                                     <img
                                     src={item}
                                     alt="Image not available"
                                     key={key+199}
                                     />
-                                    <ImageListItemBar 
+                                    <GridListTileBar 
                                     title={allTitles[key]}
                                     subtitle = {`Release Date: ${new Date(allreleaseDates[key]).toDateString()}`}
                                     key = {key+49}
                                     />
-                                </ImageListItem>
+                                </GridListTile>
                             ))}
-                        </ImageList>     
+                        </GridList>     
                     </Grid> 
                 </div>  
 

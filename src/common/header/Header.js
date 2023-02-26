@@ -52,10 +52,10 @@ export default function Header(props){
                         <li><img src={logo} className="App-logo" alt="logo" /></li>
                     </ul>
                     <ul id = "buttons2" >
-                        { bookShowButton && loggedin && <li><Link to ={`/bookshow/${props.id}`}> <Button className="BookShow" id="bookShow2"  variant="contained" color="primary">Book Show</Button></Link></li>}
-                        { bookShowButton && !loggedin && <li><Button className="BookShow" id="bookShow"  variant="contained" color="primary" onClick={handleOpen}>Book Show</Button></li>}
-                        {  !loggedin && <li><Button className="loginLogout" id="login-button"  variant="contained" color="default" onClick={handleOpen} >LOGIN</Button></li>}
-                        { loggedin && <li><Button className="loginLogout" id="logout-button"  variant="contained" color="default" onClick={handleLogout} >LOGOUT</Button></li>}    
+                        { bookShowButton && loggedin && <li><Link style={{ textDecoration: 'none' }} to ={`/bookshow/${props.id}`}> <Button style={{ marginRight : '24px' }} className="BookShow" id="bookShow2"  variant="contained" color="primary">Book Show</Button></Link></li>}
+                        { bookShowButton && !loggedin && <li><Button style={{ marginRight : '24px' }} className="BookShow" id="bookShow"  variant="contained" color="primary" onClick={handleOpen}>Book Show</Button></li>}
+                        {  !loggedin && <li><Button style={{ marginRight : '24px' }} className="loginLogout" id="login-button"  variant="contained" color="default" onClick={handleOpen} >LOGIN</Button></li>}
+                        { loggedin && <li><Button style={{ marginRight : '24px' }} className="loginLogout" id="logout-button"  variant="contained" color="default" onClick={handleLogout} >LOGOUT</Button></li>}    
                     </ul>
                 </nav>
             </header>

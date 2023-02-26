@@ -77,7 +77,7 @@ function getYouTubeVideoId(url) {
                             </Icon>
                         </Link>
                 </Typography>
-            <div className="details-main" style={{   display: 'flex' }}>
+            <div className="details-main" style={{   display: 'flex'   }}>
            
                 <div style={{ width: "20%",  marginLeft: "24px"  }}>
                 <div>
@@ -133,16 +133,14 @@ function getYouTubeVideoId(url) {
                     <Typography style = {{marginTop : '16px' , marginBottom : '16px'}} >
                         <b>Artists: </b>
                     </Typography>  
-                        <ImageList cols = {2}>
+                        <GridList cols = {2}>
                             {artistsList.map((artist,key) => (
-                                <ImageListItem  key = {key+5699}>
+                                <GridListTile  key = {key+5699}>
                                 <img src={artist.profile_url} key={key+8989} onClick={()=>{  window.location = `${artist.wiki_url}` }}/>
-                                <ImageListItemBar title = {`${artist.first_name} ${artist.last_name}`} key = {key+9699} />
-                                </ImageListItem>
+                                <GridListTileBar title = {`${artist.first_name} ${artist.last_name}`} key = {key+9699} />
+                                </GridListTile>
                             ))}    
-                        </ImageList>
-
-                        
+                        </GridList>
                 </div>
             </div>
         </div> 
