@@ -136,7 +136,7 @@ function getYouTubeVideoId(url) {
                         <ImageList cols = {2}>
                             {artistsList.map((artist,key) => (
                                 <ImageListItem  key = {key+5699}>
-                                <img src={artist.profile_url} key={key+8989}/>
+                                <img src={artist.profile_url} key={key+8989} onClick={()=>{  window.location = `${artist.wiki_url}` }}/>
                                 <ImageListItemBar title = {`${artist.first_name} ${artist.last_name}`} key = {key+9699} />
                                 </ImageListItem>
                             ))}    

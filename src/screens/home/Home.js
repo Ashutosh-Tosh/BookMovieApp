@@ -20,7 +20,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { TextField , withStyles, FormLabel,  FormControl, FormControlLabel , Input, InputLabel , Checkbox , FormHelperText} from '@material-ui/core';
+import { ListItemText ,TextField , withStyles, FormLabel,  FormControl, FormControlLabel , Input, InputLabel , Checkbox , FormHelperText} from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 
 
@@ -50,6 +50,11 @@ formControl: {
     const[selectedGenres, setSelectedGenres] = useState([]);
     const[allArtisitsForSelection,SetAllArtistsForSelection] = useState([]);
     const[releasedMovieData,setReleasedMovieData] = useState([]);
+    const[filterMovieName , setFiltermovieName] = useState("");
+    const[genres, setGenres] = useState([]);
+    const[artists, setArtists] = useState([]);
+    const[releaseDateStart, setReleaseDateStart] = useState("");
+    const[releaseDateEnd, setReleaseDateEnd] = useState("");
 
     
     useEffect(() => {
@@ -118,6 +123,57 @@ formControl: {
     }, []);
 
    //console.log(releasedMovieData.data);
+   const filterButtonHandler = async () => {
+    let linkstring = "?status=RELEASED";
+    if (filterMovieName !== "") {
+      linkstring += "&title=" + filterMovieName;
+    }
+    if (artists.length > 0) {
+      linkstring += "&artists=" + artists.toString();
+      
+    }
+    if (genres.length > 0) {
+        linkstring += "&genres=" + genres.toString();
+        
+      }
+    if (releaseDateStart !== "") {
+      linkstring += "&start_date=" + releaseDateStart;
+
+    }
+    if (releaseDateEnd !== "") {
+      linkstring += "&end_date=" + releaseDateEnd;
+    }
+    console.log(`${baseUrl}movies${encodeURI(linkstring)}`);
+    const rawResponse = await fetch(`${baseUrl}movies${encodeURI(linkstring)}`);
+    
+    if (rawResponse.ok) {
+        const result = await rawResponse.json();
+        console.log(result.movies);
+
+        
+        const allmoviesresponseUrls = await result.movies.map((movie)=>{
+            return movie.poster_url;
+        })
+
+        const alltitlesT =await result.movies.map((movie)=>{
+            return movie.title;
+        });
+    
+        const allreleaseDatez =await result.movies.map((movie)=>{
+            return movie.release_date;
+        });
+
+    
+        setReleasedMovieData(result);
+
+        setAllMoviesPosters(allmoviesresponseUrls);
+        setAllRelaseDates(allreleaseDatez);
+        setAllTitles(alltitlesT);
+        
+
+
+    }
+  }
     
     return(
         <div className="home">
@@ -166,25 +222,22 @@ formControl: {
                 </FormControl>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="my-input">Movie Name</InputLabel>
-                    <Input id="my-input" aria-describedby="my-helper-text" />      
+                    <Input id="my-moviename-input" aria-describedby="my-helper-text" onChange={(e)=>{setFiltermovieName(e.target.value)}}/>      
                 </FormControl>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="my-input">Genres</InputLabel>
                             <Select aria-describedby="my-helper-text"
-                            value={[]}
+                            input={<Input id="select-multiple-checkbox-genre" />}
+                            renderValue={(selected) => selected.join(",")}
+                            value={genres}
+                            onChange={(e)=>{setGenres(e.target.value);}}
                             multiple
                             //onChange={()=>{}}
                             >  
                                 {allGenresforSelection.map((genre,key)=>(  
-                                    <MenuItem value={genre} key={key+7499}>
-                                        <FormControlLabel
-                                        control={
-                                            <Checkbox   
-                                                //onChange={}
-                                                //name="checkedB"
-                                            />
-                                        }
-                                        label={genre}/>
+                                    <MenuItem value={genre} key={key+10999}>
+                                    <Checkbox checked={genres.indexOf(genre) > -1} />
+                                    <ListItemText primary={genre} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -193,17 +246,21 @@ formControl: {
                                 
                 <InputLabel htmlFor="my-input">Artists</InputLabel>
                         <Select 
-                        value={[]}
                         multiple
+                        input={<Input id="s-checkbox" />}
+                        renderValue={(selected) => selected.join(",")}
+                        value={artists}
+                        onChange={(e)=>{setArtists(e.target.value);}}
                         //onChange={()=>{}}
                         >  
                             {allArtisitsForSelection.map((artistDetail,key)=>(  
-                                    <MenuItem value={artistDetail.first_name} key={key+4539}>
+                                    <MenuItem value={artistDetail.first_name+" "+artistDetail.last_name} key={key+4539}>
                                         <FormControlLabel
                                         control={
-                                            <Checkbox   
-                                        //onChange={}
-                                        //name="checkedB"
+                                            <Checkbox
+                                            checked={
+                                            artists.indexOf(artistDetail.first_name + " " + artistDetail.last_name) > -1
+                                            }
                                             />
                                     }
                                     label={`${artistDetail.first_name} ${artistDetail.last_name}`}/>
@@ -213,13 +270,13 @@ formControl: {
 
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                    <TextField id="start-date" type="date" InputLabelProps={{ shrink: true }} label = "Realease Date Start" />
+                    <TextField onChange={(e)=>{setReleaseDateStart(e.target.value)}} id="start-date" type="date" InputLabelProps={{ shrink: true }} label = "Realease Date Start"  />
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                    <TextField id="end-date" type="date" InputLabelProps={{ shrink: true }} label = "Realease Date End" />
+                    <TextField  onChange={(e)=>{setReleaseDateEnd(e.target.value)}}  id="end-date" type="date" InputLabelProps={{ shrink: true }} label = "Realease Date End" />
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                    <Button variant="contained" color="primary">APPLY</Button>
+                    <Button onClick={filterButtonHandler} variant="contained" color="primary">APPLY</Button>
                 </FormControl>
                
                 </Card> 
