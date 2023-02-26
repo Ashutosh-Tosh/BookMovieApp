@@ -203,7 +203,7 @@ formControl: {
                                     />
                                     <ImageListItemBar 
                                     title={allTitles[key]}
-                                    subtitle = {`Release Date:Fri ${allreleaseDates[key]}`}
+                                    subtitle = {`Release Date: ${new Date(allreleaseDates[key]).toDateString()}`}
                                     key = {key+49}
                                     />
                                 </ImageListItem>
