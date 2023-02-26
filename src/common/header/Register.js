@@ -14,14 +14,20 @@ import axios from 'axios';
 
 
 export default function Register(props){
-
+    
+   const {baseUrl} = props;
    const [nameValue, setNameValue] = useState("");
    const [emailValue, setEmailValue] = useState("");
    const [lastNameValue, setLasNameVale] = useState("");
    const [contactValue, setContactValue] = useState("");
    const [passwrodValue, setPasswordValue] = useState("");
-   const {baseUrl} = props;
-   console.log(`${baseUrl}signup`);
+
+   const [nameValueRequired, setNameValueRequired] = useState("dispNone");
+   const [emailValueRequired, setEmailValueRequired] = useState("dispNone");
+   const [lastNameValueRequired, setLasNameValeRequired] = useState("dispNone");
+   const [contactValueRequired, setContactValueRequired] = useState("dispNone");
+   const [passwrodValueRequired, setPasswordValueRequired] = useState("dispNone");
+  
     
     const[registered, setregistered] = useState(false);
   
@@ -31,6 +37,13 @@ export default function Register(props){
 
     
         const postregistration = async () => {
+
+
+            emailValue === "" ? setEmailValueRequired("dispBlock") : setEmailValueRequired("dispNone");
+            nameValue === "" ? setNameValueRequired("dispBlock") : setNameValueRequired("dispNone");
+            lastNameValue === "" ? setLasNameValeRequired("dispBlock") : setLasNameValeRequired("dispNone");
+            contactValue === "" ? setContactValueRequired("dispBlock") : setContactValueRequired("dispNone");
+            passwrodValue === "" ? setPasswordValueRequired("dispBlock") : setPasswordValueRequired("dispNone");
             
             const params = {    
                                 "email_address": emailValue,
@@ -65,22 +78,37 @@ export default function Register(props){
             <FormControl required style={{marginTop: 30, marginBottom: 20}} className='fromunit'>
                 <InputLabel htmlFor="my-input">First Name</InputLabel>
                 <Input onChange={(event) => {setNameValue(event.target.value)}} type = "text" id="my-input1" aria-describedby="my-helper-text" />
+                <FormHelperText className={nameValueRequired}>
+                <span className="red">required</span>
+                </FormHelperText>
             </FormControl><br/> 
             <FormControl style={{marginBottom: 20}} required className='fromunit'>
                 <InputLabel htmlFor="my-input">Last Name</InputLabel>
                 <Input onChange={(event) => {setLasNameVale(event.target.value)}} type = "text" required id="my-input2" aria-describedby="my-helper-text" />
+                <FormHelperText className={lastNameValueRequired}>
+                <span className="red">required</span>
+                </FormHelperText>
             </FormControl><br/> 
             <FormControl style={{marginBottom: 20}} required className='fromunit'>
                 <InputLabel  htmlFor="my-input">Email</InputLabel>
                 <Input onChange={(event) => {setEmailValue(event.target.value)}} type = "email" required id="my-input3" aria-describedby="my-helper-text" />
+                <FormHelperText className={emailValueRequired}>
+                <span className="red">required</span>
+                </FormHelperText>
             </FormControl><br/> 
             <FormControl style={{marginBottom: 20}} required className='fromunit'>
                 <InputLabel htmlFor="my-input">Password</InputLabel>
                 <Input onChange={(event) => {setPasswordValue(event.target.value)}} type = "password" required id="my-input4" aria-describedby="my-helper-text" />
+                <FormHelperText className={passwrodValueRequired}>
+                <span className="red">required</span>
+                </FormHelperText>
             </FormControl><br/>  
             <FormControl  style={{marginBottom: 20}} required className='fromunit'>
                 <InputLabel htmlFor="my-input">Contact No.</InputLabel>
                 <Input  onChange={(event) => {setContactValue(event.target.value)}} type = "text" required id="my-input5" aria-describedby="my-helper-text" />
+                <FormHelperText className={contactValueRequired}>
+                <span className="red">required</span>
+                </FormHelperText>
             </FormControl><br/> 
             <Button onClick={postregistration}  style={{marginTop: 50 , marginBottom: 20}} className="BookShow" id="bookShow"  variant="contained" color="primary">REGISTER</Button>
             {registered && <p>Registration Successful. Please Login!</p>}
