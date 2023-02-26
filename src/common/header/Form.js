@@ -47,11 +47,11 @@ function a11yProps(index) {
   };
 }
 
-export default function Form({handleClose , loggedin , setLoggedIn}) {
+export default function Form(props) {
   const [value, setValue] = React.useState(0);
-
+  const {handleClose , loggedin , setLoggedIn , baseUrl} = props;
   const [ userIsLoggedIn , setUserIsLoggedIn] = useState(false);
- 
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -66,10 +66,10 @@ export default function Form({handleClose , loggedin , setLoggedIn}) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Login loggedin = {loggedin} setLoggedIn = {setLoggedIn} handleClose={handleClose} />
+        <Login loggedin = {loggedin} setLoggedIn = {setLoggedIn} handleClose={handleClose} props ={props} baseUrl = {baseUrl}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Register/>
+        <Register props ={props} baseUrl = {baseUrl}/>
       </TabPanel>
     </Box>
   );

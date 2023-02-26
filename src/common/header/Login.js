@@ -15,8 +15,8 @@ import { useState } from 'react';
 
 
 
-export default function Login({ handleClose , loggedin , setLoggedIn }){
-
+export default function Login(props){
+    const { baseUrl, handleClose , loggedin , setLoggedIn } = props;
     const   [userNameValue,setUserNameValue] = useState("");
     const   [userPasswordValue,setUserPasswordValue] = useState("");
 
@@ -24,7 +24,7 @@ export default function Login({ handleClose , loggedin , setLoggedIn }){
 
         
   
-    const rawResponse = await fetch('http://localhost:8085/api/v1/auth/login', {
+    const rawResponse = await fetch(`${baseUrl}auth/login`, {
                                     method : 'POST',
                                     headers : {
                                     authorization : `Basic ${window.btoa(`${userNameValue}:${userPasswordValue}`)}`
@@ -32,7 +32,7 @@ export default function Login({ handleClose , loggedin , setLoggedIn }){
         });
         if(rawResponse.ok){
             const result = await rawResponse.json();
-            console.log(result);
+            console.log("---->>Logged-IN sucessfully<<----");
             if(result.status == "ACTIVE"){
             setLoggedIn(true);
             sessionStorage.setItem("access-token", rawResponse.headers.get("access-token"));
@@ -45,7 +45,7 @@ export default function Login({ handleClose , loggedin , setLoggedIn }){
     return(
         <Box textAlign='center' >
             <form>
-                <FormControl required style={{marginTop: 30 , marginBottom: 15}} className='fromunit'>
+                <FormControl required style={{marginTop: 30 , marginBottom: 15}} className='fromunit' >
                     <InputLabel htmlFor="my-input">Username</InputLabel>
                     <Input onChange={(event) => {setUserNameValue(event.target.value)}} type = "text" required id="my-input9" aria-describedby="my-helper-text" />
                 </FormControl><br/> 

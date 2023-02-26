@@ -9,7 +9,7 @@ import Confirmation from "../screens/confirmation/Confirmation";
 
 
 const Controller = () => {
-  const baseUrl = "/api/v1/";
+  const baseUrl = "http://localhost:8085/api/v1/";
 
 //  run this for no-cors error -->
 //chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security

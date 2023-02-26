@@ -13,14 +13,15 @@ import axios from 'axios';
 
 
 
-export default function Register(){
+export default function Register(props){
 
    const [nameValue, setNameValue] = useState("");
    const [emailValue, setEmailValue] = useState("");
    const [lastNameValue, setLasNameVale] = useState("");
    const [contactValue, setContactValue] = useState("");
    const [passwrodValue, setPasswordValue] = useState("");
-
+   const {baseUrl} = props;
+   console.log(`${baseUrl}signup`);
     
     const[registered, setregistered] = useState(false);
   
@@ -40,7 +41,7 @@ export default function Register(){
                             }
              
                            
-        const   rawResponse = await fetch('http://localhost:8085/api/v1/signup', {
+        const rawResponse = await fetch(`${baseUrl}signup`, {
                                         body : JSON.stringify(params),
                                         method : 'POST',
                                         headers : {
@@ -50,7 +51,7 @@ export default function Register(){
             });
             if(rawResponse.ok){
                 const result = await rawResponse.json();
-                console.log(result);
+                console.log("--->Registered Sucessfully--->");
                 if(result.status=="ACTIVE"){
                     setregistered(true);
                 }
