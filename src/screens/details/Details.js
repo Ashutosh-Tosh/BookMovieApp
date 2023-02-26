@@ -24,6 +24,7 @@ export default function Details(props){
     const[fiveStars, setFiveStars] = useState([1,2,3,4,5]);
     const[starNumber, setStarNumber] = useState();
     const[artistsList, setArtistList] = useState([]);
+    
 
 
     
@@ -63,7 +64,7 @@ function getYouTubeVideoId(url) {
     return( 
         <div className="home">
             <div className="header">    
-                 <Header baseUrl={props.baseUrl} id={props.match.params.id} props ={props} bookShowButton = {bookShowButton} setBookShowButton = {setBookShowButton} openedMovie = {openedMovie}/>
+                 <Header baseUrl={props.baseUrl} id={props.match.params.id} props={props} bookShowButton = {bookShowButton} setBookShowButton = {setBookShowButton} openedMovie = {openedMovie}/>
             </div>
             <Typography style={{ 
                     cursor: "pointer" ,
